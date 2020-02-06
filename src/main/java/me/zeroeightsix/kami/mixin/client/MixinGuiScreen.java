@@ -2,12 +2,15 @@ package me.zeroeightsix.kami.mixin.client;
 
 import me.zeroeightsix.kami.module.ModuleManager;
 import me.zeroeightsix.kami.module.modules.gui.CleanGUI;
+import me.zeroeightsix.kami.util.forgehax.MapColors;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.MapItemRenderer;
 import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
@@ -38,8 +41,8 @@ public class MixinGuiScreen {
                     // We'll take over!
                     info.cancel();
 
-                    NonNullList<ItemStack> nonnulllist = NonNullList.<ItemStack>withSize(27, ItemStack.EMPTY);
-                    ItemStackHelper.loadAllItems(blockEntityTag, nonnulllist);
+                    NonNullList<ItemStack> nonNullList = NonNullList.<ItemStack>withSize(27, ItemStack.EMPTY);
+                    ItemStackHelper.loadAllItems(blockEntityTag, nonNullList);
 
                     GlStateManager.enableBlend();
                     GlStateManager.disableRescaleNormal();
@@ -73,10 +76,10 @@ public class MixinGuiScreen {
                     GlStateManager.enableLighting();
                     GlStateManager.enableDepth();
                     RenderHelper.enableGUIStandardItemLighting();
-                    for (int i = 0; i < nonnulllist.size(); i++) {
+                    for (int i = 0; i < nonNullList.size(); i++) {
                         int iX = x + (i % 9) * 16 + 11;
                         int iY = y + (i / 9) * 16 - 11 + 8;
-                        ItemStack itemStack = nonnulllist.get(i);
+                        ItemStack itemStack = nonNullList.get(i);
 
                         itemRender.renderItemAndEffectIntoGUI(itemStack, iX, iY);
                         itemRender.renderItemOverlayIntoGUI(this.fontRenderer, itemStack, iX, iY, null);
@@ -92,8 +95,18 @@ public class MixinGuiScreen {
             }
         }
         if (ModuleManager.isModuleEnabled("MapPreview") && stack.getItem() instanceof ItemMap || stack.getItem() instanceof ItemEmptyMap || stack.getItem() instanceof ItemMapBase) {
-//            MapItemRenderer mapItemRenderer = new MapItemRenderer.Instance;
+//            info.cancel();
+//
+//            GlStateManager.enableBlend();
+//            GlStateManager.disableRescaleNormal();
+//            RenderHelper.disableStandardItemLighting();
+//            GlStateManager.disableLighting();
+//            GlStateManager.disableDepth();
+//
 //            NBTTagCompound tagCompound = stack.getTagCompound();
+//            mc.entityRenderer.mapItemRenderer.renderMap(stack.);
+//            stack.getItem()
+//            itemRenderer.renderItem(mc.player.getLastAttackedEntity(), stack, ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND);
 
         }
     }
