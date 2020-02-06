@@ -5,11 +5,11 @@ import me.zeroeightsix.kami.module.modules.gui.CleanGUI;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.MapItemRenderer;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.item.ItemShulkerBox;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
 import org.spongepowered.asm.mixin.Mixin;
@@ -90,6 +90,11 @@ public class MixinGuiScreen {
                     GlStateManager.enableRescaleNormal();
                 }
             }
+        }
+        if (ModuleManager.isModuleEnabled("MapPreview") && stack.getItem() instanceof ItemMap || stack.getItem() instanceof ItemEmptyMap || stack.getItem() instanceof ItemMapBase) {
+//            MapItemRenderer mapItemRenderer = new MapItemRenderer.Instance;
+//            NBTTagCompound tagCompound = stack.getTagCompound();
+
         }
     }
 
